@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>timeago</title>
+  <style>
+    body{
+      height:800px;
+    }
+    .content{
+      text-align: center;
+    }
+    .mask{
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+    }
+    .vertical-center{
+      position: relative;
+      transform: translateY(-50%);
+      top:50%;
+    }
+
+  </style>
+</head>
+<body>
+<div class="mask">
+  <div class="content vertical-center">
+    <div>
+      <span>你在</span>
+      <span class="timeago_page">刚刚</span>
+      <span>前打开了这个页面</span>
+    </div>
+    <div>
+      <span>Stone已经出生</span>
+      <span class="timeago_join"></span>
+    </div>
+  </div>
+</div>
+<script>
+  var log = function () {
+    console.log.apply(console, arguments)
+  }
+  var e = function(sel) {
+    return document.querySelector(sel)
+  }
+  //turnToUnix,把時間日期變成Unix時間
+  function turnToUnix(year, month, day, hour, minute, second) {
+    var commonTime = new Date(Date.UTC(year, month - 1, day, hour, minute, second))
+    var a = (commonTime.getTime()/1000 - 8*60*60);
+    log('a是',a)
+    log('a的类型是',typeof a)
+    return a
+  }
+  turnToUnix(1994,08,13,21,21,21)
+  //insetTime 輸入毫秒差,相應的時間,將相應的時間差添加到相應的位置.
+  function insetTime(t,year,month,day,hour,minute,second,position){
+    if(t < 60){
+      var str = `${second}秒`
+      var timeago = e(position)
+      timeago.innerText = str
+    }
+    if(t == 60){
+      var str1 = `一分钟`
+      var timeago = e(position)
+      timeago.innerText = str1
+    }
+    if(60 < t && t < 3600){
+      log('t=',t)
+      log('执行第三个IF')
+      var str2 = `${minute}分钟${second}秒`
+      var timeago = e(position)
+      timeago.innerText = str2
+    }
+    if(t == 3600){
+      var str3 = `1小时`
+      var timeago = e(position)
+      timeago.innerText = str3
+    }
+    if(3600 < t && t < 86400){
+      var str4 = `${hour}小时${minute}分钟${second}秒`
+      var timeago = e(position)
+      timeago.innerText = str4
+    }
+    if(t == 86400){
+      var str5 = `1天`
+      var timeago = e(position)
+      timeago.innerText = str5
+    }
+    if(t > 86400 && t < 86400*30){
+      var str6 = `${day}天${hour}小时${minute}分钟${second}秒`
+      var timeago = e(position)
+      timeago.innerText = str6
+    }
+    if( t > 86400*30 && t <86400*365 ){
+      var str6 = `${month}月${day}天${hour}小时${minute}分钟${second}秒`
+      var timeago = e(position)
+      timeago.innerText = str6
+    }
+    if(  t > 86400*365 ){
+      var str6 = `${year}年${month}月${day}天${hour}小时${minute}分钟${second}秒`
+      var timeago = e(position)
+      timeago.innerText = str6
+    }
+  }
+  function Now(){
+    var timeNow = new Date()
+    var content1 = '.timeago_page'
+    var n = 0
+    var timeNew = null
+    function timeFromNow(time,position) {
+      var timeOrinal = time
+      setInterval(function timePast(){
+        var timeNew = new Date()
+        var n = Math.floor((timeNew - timeOrinal)/1000)
+        var year = Math.floor(n/(86400*365))
+        var month = Math.floor(n%(86400*365)/(86400*30))
+        var day = Math.floor(n/86400)
+        var hour = Math.floor(n%86400/3600)
+        var minute = Math.floor(n%86400%3600/60)
+        var second = Math.floor(n%60)
+        insetTime(n,year,month,day,hour,minute,second,position)
+      },1000)
+    }
+    timeFromNow(timeNow,content1)
+  }
+  function setTimeago(year, month, day, hour, minute, second,position) {
+    var tBefore = turnToUnix(year, month, day, hour, minute, second)
+    setInterval(function timePast(){
+      var timeNew = new Date()
+      var r = timeNew.getTime()/1000
+      var tNow = Math.floor(r)
+      var n = Math.floor((tNow - tBefore))
+      var year = Math.floor(n/(86400*365))
+      var month = Math.floor(n%(86400*365)/(86400*30))
+      var day = Math.floor(n%(86400*365)%(86400*30)/86400)
+      var hour = Math.floor(n%86400/3600)
+      var minute = Math.floor(n%86400%3600/60)
+      var second = Math.floor(n%60)
+      insetTime(n,year,month,day,hour,minute,second,position)
+    },1000)
+  }
+  function _main(){
+    Now()
+    var content2 = '.timeago_join'
+    setTimeago(1994,08,13, 19,00,21,content2 )
+  }
+  _main()
+
+</script>
+</body>
+</html>
