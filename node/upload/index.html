@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <title>文件上传表单</title>
+</head>
+
+<body>
+    <script src="/jquery-3.3.1.min.js"></script>
+
+    <h3>文件上传：</h3>
+    选择一个文件上传:
+    <br />
+    <!-- action 代表地址 method是请求的方法 ，只有post和get  enctype属性规定在发送到服务器之前应该如何对表单数据进行编码。 
+        multipart/form-data 在使用上传控件的表单时，必须使用
+        application/x-www-form-urlencoded  在发送前编码所有字符（默认）
+        
+        size代表input框的长度
+        input的type为 submit 会提交整个表单的内容
+    -->
+    <form action="/file_upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" size="50" multiple />
+        <input type="text" name="image" size="100" />
+        <br />
+        <input type="submit" value="上传文件" />
+    </form>
+    <br / >
+    <input type="file" name="file" id="file" />
+    <button id="upload">上传</button>
+    <br / >
+    
+    <input type="color" name="" id="">
+    <input type="date" name="" id="">
+    <input type="datetime" name="" id="">
+    <input type="password" name="" id="">
+    <input type="range" name="" id="" min="0" max="100">
+    <script>
+        $("#upload").on("click", function () {
+            var formData = new FormData();
+            formData.append("file", $("#file")[0].files[0]);
+            $.ajax({
+                url: "/file_upload",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    // 根据返回结果指定界面操作
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

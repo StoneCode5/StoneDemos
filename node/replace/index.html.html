@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" console.log="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" console.log="ie=edge">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="console.log">
+
+    </div>
+    <script>
+        var log = function () {
+            console.log.apply(null, arguments)
+        }
+        var e = function (el) {
+            return document.querySelector(el)
+        }
+        // 这个方式是构造函数的方式。缺点主要在于：构造函数的每一个方法都要在每个实例上创建一遍。
+        // 不同实例上的同名函数是不相等的
+        var dialog = function (title, body, cancelText, oktext) {
+            this.title = title ? title : '温馨提示'
+            this.body = body ? body : ''
+            this.cancelText = cancelText ? cancelText : '取消'
+            this.oktext = oktext ? oktext : '确定'
+            this.show = function () {
+                log('show')
+                this.appendHTML()
+            }
+            this.close = function () {
+                $('.dialog_model').remove()
+            }
+            this.appendHTML = function () {
+                var html = `<div class="dialog_model" style="top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background-color: rgba(0, 0, 0, 0.9);
+                        position: fixed;">
+                        <div class="dialog " style="position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background-color: #fff;">
+                        <div class="dialog_title">${this.title}</div>
+                        <div class="dialog_body">${this.body}</div>
+                        <div class="dialog_ok">${this.cancelText}</div>
+                        <div class="dialog_cancle">${this.oktext}</div>
+                    </div>
+                        </div>
+                `
+                $('body').append(html)
+            }
+            this.test = function () {
+                log('test')
+            }
+        }
+        // var a1 = new dialog('a1', 'a1的body')
+        // var a2 = new dialog('a2', 'a2的body')
+        // a1.show()
+        // setTimeout(() => {
+        //     a1.close()
+        // }, 1000);
+        // setTimeout(() => {
+        //     a2.show()
+        // }, 2000);
+        // setTimeout(() => {
+        //     a2.close()
+        // }, 3000);
+        // 原型模式，
+        // 使用原型模式的好处 是可以让所有的实例共享方法和属性。
+        // 构造模式和原型模式混用
+        var Dialog = function (title, body, cancelText, oktext) {
+            this.title = title ? title : '温馨提示'
+            this.body = body ? body : ''
+            this.cancelText = cancelText ? cancelText : '取消'
+            this.oktext = oktext ? oktext : '确定'
+        }
+        Dialog.prototype.show = function () {
+            this.appendHTML()
+        }
+        Dialog.prototype.appendHTML = function() {
+            var html = `<div class="dialog_model" style="top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background-color: rgba(0, 0, 0, 0.9);
+                        position: fixed;">
+                        <div class="dialog " style="position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background-color: #fff;">
+                        <div class="dialog_title">${this.title}</div>
+                        <div class="dialog_body">${this.body}</div>
+                        <div class="dialog_ok">${this.cancelText}</div>
+                        <div class="dialog_cancle">${this.oktext}</div>
+                    </div>
+                        </div>
+                `
+            $('body').append(html)
+        }
+        Dialog.prototype.close = function () {
+            $('.dialog_model').remove()
+        }
+        var a1 = new Dialog('a1', 'a1的body')
+        var a2 = new Dialog('a2', 'a2的body')
+        a1.show()
+        setTimeout(() => {
+            a1.close()
+        }, 1000);
+        setTimeout(() => {
+            a2.show()
+        }, 2000);
+        setTimeout(() => {
+            a2.close()
+        }, 3000);
+    </script>
+</body>
+
+</html>
