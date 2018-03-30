@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>闭包</title>
+    <style type="text/css">
+    div {
+        background: pink;
+        width: 100px;
+        height: 100px;
+        margin-bottom: 10px;
+    }
+    </style>
+</head>
+
+<body>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <!-- <p onclick="bobo()">tt</p> -->
+</body>
+<script type="text/javascript">
+// var s = [];
+
+// for (var i = 0; i < 4; i++) {
+//     s[i] = i;
+// }
+// console.log(s)
+//闭包实现
+var divs = document.getElementsByTagName("div");
+
+for (var i = 0; i < divs.length; i++) {
+    var dd = 0;
+     divs[i].addEventListener("click", function() {
+
+        alert("divs #" + i + "was clicked.");
+     }, false);
+     //输出永远i＝2；
+     //因为function在click事件发生后才执行函数，
+     //此时才执行function 中的alert() 
+     //而此时，循环事件已经结束，在window对象中的i的值为2，所以输入为2
+}
+console.log(window.i) // 2
+
+// var divs = document.getElementsByTagName('div');
+// for (var i = 0; i < divs.length; i++) {
+//    　　　// function bb(num){
+
+//         //  divs[i].addEventListener('click', function() {
+//          //   alert(num);
+//         //}, false)
+//    // }
+//    // bb(i)
+
+//     (function(num) {
+//         alert(num)
+//         divs[i].addEventListener('click', function() {
+//             alert(num);
+//         }, false)
+//     })(i);
+//             //采用闭包可在循环中，每循环一次就执行匿名function方法,就更上面的function bb改变跟闭包实现一样可用,执行匿名函数
+// }
+</script>
+
+</html>
+
+

@@ -5,7 +5,7 @@
 </head>
 
 <body>
-    <script src="/jquery-3.3.1.min.js"></script>
+    <!-- <script src="/jquery-3.3.1.min.js"></script> -->
 
     <h3>文件上传：</h3>
     选择一个文件上传:
@@ -16,6 +16,8 @@
         
         size代表input框的长度
         input的type为 submit 会提交整个表单的内容
+
+        form表单上传文件
     -->
     <form action="/file_upload" method="post" enctype="multipart/form-data">
         <input type="file" name="image" size="50" multiple />
@@ -23,31 +25,64 @@
         <br />
         <input type="submit" value="上传文件" />
     </form>
-    <br / >
+    <br />
+    <!-- 
+        ajax上传 
+     -->
     <input type="file" name="file" id="file" />
     <button id="upload">上传</button>
-    <br / >
-    
+    <br />
+
     <input type="color" name="" id="">
     <input type="date" name="" id="">
     <input type="datetime" name="" id="">
     <input type="password" name="" id="">
     <input type="range" name="" id="" min="0" max="100">
     <script>
-        $("#upload").on("click", function () {
-            var formData = new FormData();
-            formData.append("file", $("#file")[0].files[0]);
-            $.ajax({
-                url: "/file_upload",
-                type: "POST",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (response) {
-                    // 根据返回结果指定界面操作
+        // $("#upload").on("click", function () {
+        //     var formData = new FormData();
+        //     formData.append("file", $("#file")[0].files[0]);
+        //     $.ajax({
+        //         url: "/file_upload",
+        //         type: "POST",
+        //         data: formData,
+        //         processData: false,
+        //         contentType: false,
+        //         success: function (response) {
+        //             // 根据返回结果指定界面操作
+        //         }
+        //     });
+        // });
+        var url = 'http:/www.baidu.com/get?qwe=阿斯扥&ewq=2'
+        var handler = function () {
+            if (this.readyState !== 4) {
+                return;
+            }
+            if (this.status === 200) {
+
+            } else {
+
+            }
+        };
+        var ajax = function (url, sucCallback, errCallback) {
+            var client = new XMLHttpRequest();
+            var handler = function () {
+                if (this.readyState !== 4) {
+                    return;
                 }
-            });
-        });
+                if (this.status === 200) {
+                    sucCallback
+                } else {
+                    errCallback
+                }
+            };
+            client.open("GET", url);
+            client.onreadystatechange = handler;
+            client.responseType = "json";
+            client.setRequestHeader("Accept", "application/json");
+            client.send();
+        }
+
     </script>
 </body>
 

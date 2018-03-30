@@ -19,6 +19,9 @@ obj.hello()
 sayHello.call(obj)
 //  console.log(obj.fn())
 
+setTimeout(() => {
+    obj.hello()
+}, 1500)
 // console.log(['a', 'b'].slice())
 // log(['a', 'b'].slice())
 
@@ -67,4 +70,6 @@ foo(); // ReferenceError: a is not defined
 // 1. 默认绑定
 // 2.隐形绑定
 // 3.显性绑定 bind会返回一个新的函数 同时bind是es5中的内容
+
+
 

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>hah</title>
+</head>
+
+<body>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <script type="text/javascript">
+        // var elems = document.getElementsByTagName('div');
+        // console.log('elems', elems)
+        // for (var i = 0; i < elems.length; i++) {
+        //     elems[i].addEventdivstener('cdivck', function (e) {
+        //         console.log('i', i)
+        //         e.preventDefault();
+        //         alert('I am divnk #' + i);
+        //     });
+        // }
+
+        var divs = document.getElementsByTagName("div");
+        Array.prototype.forEach.call(divs, function (v, i) {
+            divs[i].addEventListener("click", function () {
+                alert("divs #" + i + "was clicked.");
+            }, false);
+        })
+
+        // for (var i = 0; i < divs.length; i++) {
+        //     var dd = 0;
+        //     divs[i].addEventListener("click", function () {
+
+        //         alert("divs #" + i + "was clicked.");
+        //     }, false);
+        //     //输出永远i＝2；
+        //     //因为function在click事件发生后才执行函数，
+        //     //此时才执行function 中的alert() 
+        //     //而此时，循环事件已经结束，在window对象中的i的值为2，所以输入为2
+        // }
+        // console.log(i == 7)
+        // for (var i = 0; i < 5; i++) {
+        //     function abc(j) {
+        //         // setTimeout(function () {
+        //         console.log(j);
+        //         // }, 2000);
+        //     }
+        //     abc(i)
+        // }
+
+
+        // var a = 10;
+
+        // function functionA() {
+
+        //     console.log("Start function A");
+
+        //     function functionB() {
+        //         console.log("In function B");
+        //     }
+
+        //     functionB();
+
+        // }
+
+        // functionA();
+
+        // console.log("GlobalContext");
+        // function test() {
+        //     console.log(a);
+        //     console.log(foo());
+
+        //     var a = 1;
+        //     function foo() {
+        //         return 2;
+        //     }
+        //     function foo() {
+        //         return 3;
+        //     }
+
+        //     var foo = 4
+        // }
+
+        // test();
+
+        // var a = 20;
+
+        // function test() {
+        //     var b = a + 10;
+
+        //     function innerTest() {
+        //         var c = 10;
+        //         return b + c;
+        //     }
+
+        //     return innerTest();
+        // }
+
+        // test();
+        // setTimeout(function () {
+        //     console.log('timeout')
+        // }, 0)
+        // console.log('a')
+        // console.log('a')
+        // console.log('a')
+        // console.log('a')
+        // console.log('a')
+        // console.log('a')
+        // console.log('a')
+        // console.log('a')
+        // console.log('a')
+
+        // for (var i = 1; i <= 5; i++) {
+
+        // }
+        // function log() {
+        //     console.log
+        // }
+
+        // function outer(params) {
+        //     let i = 0
+        //     setTimeout(function () {
+        //         console.log(i)
+        //     }, 1000)
+        //     i = 1
+        //     setTimeout(function () {
+        //         console.log(i)
+        //     }, 1000)
+        //     i = 2
+        //     setTimeout(function () {
+        //         console.log(i)
+        //     }, 1000)
+        // }
+        // outer()
+
+
+        // (function () {
+        //     var item = 1
+        //     function order() {
+        //         console.log('order')
+        //     }
+        //     order()
+        //     window.a = '2'
+        // })(window)
+        // console.log('hjere')
+        // var here = '2';
+        // (function () {
+        //     var item = 1
+        //     function order() {
+        //         console.log('order')
+        //     }
+        //     order()
+        //     window.a = '3'
+        // })(window)
+
+    </script>
+</body>
+
+</html>

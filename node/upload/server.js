@@ -2,18 +2,28 @@ var express = require('express');
 var app = express();
 var fs = require("fs");
 
-var bodyParser = require('body-parser');
-var multer = require('multer'); // 用于上传的插件
+// var bodyParser = require('body-parser');
+// var multer = require('multer'); // 用于上传的插件
 // app.use 就是给当前指定路径增加 中间件用作处理。 没有指定路径时，默认就是‘/’所有路径都会执行这个中间件
 
 app.use(express.static('public')); // app的静态资源的管理  比如我要引入一个JS文件，将JS文件放在public文件夹下面 前端要省略public
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(multer({ dest: '/tmp/' }).array('image'));
-const upload = require('multer')({ dest: 'uploads/' });
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(multer({ dest: '/tmp/' }).array('image'));
+// const upload = require('multer')({ dest: 'uploads/' });
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + "/" + "index.html");
 })
+
+//  form的test
+app.post('/form_test', function (req, res) {
+    var obj = {
+        msg: 'succ',
+        data: [1,2,3]
+    }
+    res.json(obj)
+})
+
 
 // app.use('/hello', function (req, res, next) {
 //     res.send('Hello World');
